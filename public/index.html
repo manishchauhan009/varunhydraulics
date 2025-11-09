@@ -2,42 +2,95 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <!-- Primary Meta Tags -->
+    <title>Varun Hydraulics — Forklift & Hydraulic Repair | Vapi, Gujarat</title>
+    <meta name="title" content="Varun Hydraulics — Forklift & Hydraulic Repair | Vapi, Gujarat" />
+    <meta name="description" content="Varun Hydraulics — professional forklift and hydraulic system repair in Vapi. On-site repairs, pump & cylinder rebuilds, preventive maintenance and emergency support. Call +91 999 874 8236." />
+    <meta name="keywords" content="forklift repair, hydraulic repair, pump repair, cylinder rebuild, preventive maintenance, Vapi, Gujarat, Varun Hydraulics" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Varun Hydraulics" />
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <!-- Viewport / Mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#F59E0B" /> <!-- yellow brand color -->
+
+    <!-- Canonical (change to your real domain in production) -->
+    <link rel="canonical" href="https://www.varunhydraulics.in/" />
+
+    <!-- Favicon / Touch Icons -->
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png" />
+
+    <!-- Manifest (PWA) -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- Open Graph / Social -->
+    <!-- Replace the social image path with an actual share image in public/ (recommended: 1200x630) -->
+    <meta property="og:type" content="business.business" />
+    <meta property="og:title" content="Varun Hydraulics — Forklift & Hydraulic Repair" />
+    <meta property="og:description" content="On-site forklift and hydraulic system repair in Vapi — pump & cylinder rebuilds, preventive maintenance, and emergency support. Call +91 999 874 8236." />
+    <meta property="og:url" content="https://www.varunhydraulics.in/" />
+    <meta property="og:image" content="%PUBLIC_URL%/social-share.jpg" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Varun Hydraulics — Forklift & Hydraulic Repair" />
+    <meta name="twitter:description" content="On-site forklift and hydraulic system repair in Vapi — pump & cylinder rebuilds, preventive maintenance, and emergency support." />
+    <meta name="twitter:image" content="%PUBLIC_URL%/social-share.jpg" />
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="%PUBLIC_URL%/assets/logo.svg" as="image" />
+    <link rel="preload" href="%PUBLIC_URL%/assets/hero-forklift.jpg" as="image" />
+
+    <!-- Structured data (JSON-LD) — LocalBusiness -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Varun Hydraulics",
+        "image": "%PUBLIC_URL%/assets/about-workshop.jpg",
+        "@id": "https://www.varunhydraulics.in/",
+        "url": "https://www.varunhydraulics.in/",
+        "telephone": "+919998748236",
+        "priceRange": "₹₹",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Amar Nagar, Chanod",
+          "addressLocality": "Vapi",
+          "addressRegion": "Gujarat",
+          "postalCode": "396195",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 20.400000,
+          "longitude": 72.992000
+        },
+        "openingHours": "Mo,Tu,We,Th,Fr,Sa 09:00-19:00",
+        "sameAs": [
+          "https://www.facebook.com/varunhydraulics",
+          "https://www.linkedin.com/company/varunhydraulics",
+          "https://www.instagram.com/varunhydraulics"
+        ]
+      }
+    </script>
+
+    <!-- Optional: analytics snippet placeholder (insert your analytics provider here if desired) -->
+    <!-- Example: Google Analytics or GTM should go here (defer to privacy policy and GDPR requirements) -->
+
+    <!-- Stylesheet entry (CRA will inject the bundle CSS automatically when you build) -->
+    <link rel="stylesheet" href="%PUBLIC_URL%/index.css" />
+
+    <!-- Accessibility: language already set on html tag, consider alternate languages with hrefLang if you add translations -->
   </head>
+
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <!-- Scripts are injected by the build process in Create React App -->
   </body>
 </html>

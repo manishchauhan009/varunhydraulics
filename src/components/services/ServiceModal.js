@@ -61,7 +61,7 @@ export default function ServiceModal({ service, onClose }) {
 
               <div className="p-4 bg-gray-50 rounded-lg">
                 <div className="text-xs text-gray-500">Quick contact</div>
-                <a href="tel:+9198XXXXXXX" className="font-semibold text-gray-900">+91 98X XXX XXXX</a>
+                <a href="tel:+919998748236" className="font-semibold text-gray-900">+91 999 874 8236</a>
                 <div className="mt-2">
                   <a
                     href="#contact"

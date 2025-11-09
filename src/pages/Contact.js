@@ -89,8 +89,8 @@ export default function Contact() {
                 </span>
                 <div>
                   <div className="font-semibold text-sm text-gray-600">Working Hours</div>
-                  <p className="text-base font-medium">Mon–Sat: 9:00 AM – 7:00 PM</p>
-                  <p className="text-base font-medium text-gray-500">Sunday: Closed</p>
+                  <p className="text-base font-medium">Mon–Sat: 10:00 AM – 7:00 PM</p>
+                  <p className="text-base font-medium text-gray-500">Sunday: 10:00 AM – 4:00 PM</p>
                 </div>
               </div>
             </div>
@@ -114,7 +114,7 @@ export default function Contact() {
       <section className="relative h-96 bg-gray-100 dark:bg-slate-800">
         <iframe
           title="Varun Hydraulics Location"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680.4192426928854!2d73.18121851538318!3d22.309425985322853!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc8b30f3d22e5%3A0x7308d6a85927d89c!2sVadodara%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1698858039282!5m2!1sen!2sin"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.0000!2d72.8890000!3d20.4020000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be8XXXXXXX%3A0xXXXXXXXXXXXX!2sAmar+Nagar%2C+Chanod%2C+Vapi%2C+Gujarat%2C+India!5e0!3m2!1sen!2sin!4v0000000000000!5m2!1sen!2sin"
           width="100%"
           height="100%"
           style={{ border: 0 }}

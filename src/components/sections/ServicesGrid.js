@@ -4,12 +4,134 @@ import ServiceModal from '../services/ServiceModal'
 import EnquiryModal from '../services/EnquiryModal'
 
 const SERVICES = [
-  { id: 1, title: 'Forklift Repair', desc: 'Inspection, parts replacement & safety checks for major forklift brands.', details: 'Complete diagnostic, safety checks, brake & mast adjustments, routine parts replacement and test runs to ensure safe operation.', icon: 'wrench' },
-  { id: 2, title: 'Hydraulic Pump Repair', desc: 'Diagnose & repair pumps, replacement if required, testing under load.', details: 'Pump diagnosis, seal & bearing replacement, flow testing and bench testing to confirm pressure and performance.', icon: 'pump' },
-  { id: 3, title: 'Cylinder Rebuild', desc: 'Seal replacement, rod repair, and pressure testing to factory specs.', details: 'Full cylinder strip & rebuild, chrome rod repair/polish, new seals, and pressure testing to ensure leak-free operation.', icon: 'cylinder' },
-  { id: 4, title: 'Preventive Maintenance', desc: 'Planned maintenance contracts and on-site servicing to reduce downtime.', details: 'Tailored preventive schedules, parts inspection, fluid analysis, and maintenance logs to extend equipment lifetime.', icon: 'calendar' },
-  { id: 5, title: 'Emergency On-site Service', desc: 'Rapid response team for critical breakdowns — trained technicians and spare parts.', details: 'Priority dispatch, on-site repairs, temporary workarounds to restore critical operation and follow-up permanent fixes.', icon: 'flash' },
-]
+  // 🏗️ Forklift Services
+  {
+    id: 1,
+    title: 'Forklift Repair & Overhaul',
+    desc: 'Full-service forklift repairs including diagnostics, part replacement, and safety checks for all major brands.',
+    details:
+      'We specialize in engine tuning, brake system repair, mast & hydraulic overhaul, and load testing to ensure optimal forklift performance and operator safety.',
+    icon: 'wrench',
+  },
+  {
+    id: 2,
+    title: 'Forklift Engine & Transmission Service',
+    desc: 'Complete engine and transmission rebuilds, oil changes, and gear calibration.',
+    details:
+      'Our experts service diesel, electric, and LPG forklifts — including clutch adjustments, fluid replacement, and gearbox repair.',
+    icon: 'settings',
+  },
+  {
+    id: 3,
+    title: 'Forklift Electrical & Battery System',
+    desc: 'Troubleshooting and repair for electrical and battery-powered forklifts.',
+    details:
+      'We inspect battery cells, chargers, wiring harnesses, sensors, alternators, and lighting systems to maintain peak electrical performance.',
+    icon: 'battery',
+  },
+  {
+    id: 4,
+    title: 'Forklift Tyre & Brake Service',
+    desc: 'Tyre replacement, brake pad changes, and safety brake inspections.',
+    details:
+      'We offer both solid and pneumatic tyre fitting, brake calibration, and replacement for master cylinders and brake lines.',
+    icon: 'truck',
+  },
+
+  // 💧 Hydraulic System Services
+  {
+    id: 5,
+    title: 'Hydraulic Pump Repair',
+    desc: 'Diagnose and rebuild hydraulic pumps with precision testing under load.',
+    details:
+      'We handle vane, gear, and piston pumps — including seal replacement, shaft alignment, flow-rate calibration, and pressure testing.',
+    icon: 'pump',
+  },
+  {
+    id: 6,
+    title: 'Hydraulic Cylinder Rebuild',
+    desc: 'Seal and rod replacement, polishing, and leak-free performance testing.',
+    details:
+      'We perform complete cylinder disassembly, chrome rod repair, seal kit installation, and hydraulic pressure testing for guaranteed reliability.',
+    icon: 'cylinder',
+  },
+  {
+    id: 7,
+    title: 'Hydraulic Hose & Fitting Replacement',
+    desc: 'Custom-made high-pressure hoses and fittings for all hydraulic systems.',
+    details:
+      'We provide hose crimping, fitting replacement, and emergency hose repair to minimize downtime and ensure fluid integrity.',
+    icon: 'link',
+  },
+  {
+    id: 8,
+    title: 'Hydraulic Valve & Control System Service',
+    desc: 'Repair and calibration of hydraulic control valves, directional valves, and flow regulators.',
+    details:
+      'Our team diagnoses faulty valves, replaces seals, and adjusts control settings to ensure optimal fluid direction and pressure management.',
+    icon: 'sliders',
+  },
+
+  // 🔧 Maintenance & Support
+  {
+    id: 9,
+    title: 'Preventive Maintenance Contracts',
+    desc: 'Scheduled servicing to keep your forklifts and hydraulics in top shape.',
+    details:
+      'Regular maintenance, oil changes, inspection reports, and wear-part replacement to prevent costly breakdowns.',
+    icon: 'calendar',
+  },
+  {
+    id: 10,
+    title: 'Emergency On-site Service',
+    desc: 'Rapid response for forklift or hydraulic breakdowns anywhere in the region.',
+    details:
+      'Our mobile technicians arrive with essential tools, parts, and diagnostic kits to restore your operations swiftly.',
+    icon: 'flash',
+  },
+  {
+    id: 11,
+    title: 'Hydraulic Power Pack Repair & Fabrication',
+    desc: 'Custom-built and repaired hydraulic power packs for industrial use.',
+    details:
+      'We design, fabricate, and service power packs including pump-motor alignment, tank cleaning, and pressure testing.',
+    icon: 'toolbox',
+  },
+  {
+    id: 12,
+    title: 'Fabrication & Custom Engineering Works',
+    desc: 'Design and fabrication of hydraulic structures and support frames.',
+    details:
+      'We undertake custom metal fabrication, welding, machine frame repair, and hydraulic component housing construction.',
+    icon: 'hammer',
+  },
+
+  // ⚙️ Industrial Add-ons
+  {
+    id: 13,
+    title: 'Hydraulic Oil Filtration & Fluid Health Check',
+    desc: 'Ensure long life of systems through clean fluid management.',
+    details:
+      'We provide oil filtration, contamination testing, and fluid replacement to maintain hydraulic system efficiency.',
+    icon: 'droplet',
+  },
+  {
+    id: 14,
+    title: 'Spare Parts Supply',
+    desc: 'Genuine and high-quality forklift & hydraulic components.',
+    details:
+      'We supply OEM-grade seals, hoses, valves, filters, pumps, and electrical spares for forklifts and hydraulic systems.',
+    icon: 'package',
+  },
+  {
+    id: 15,
+    title: 'AMC (Annual Maintenance Contract)',
+    desc: 'Comprehensive yearly service contracts for peace of mind.',
+    details:
+      'Our AMC covers scheduled inspections, emergency support, priority servicing, and discounts on spare parts.',
+    icon: 'clipboard',
+  },
+];
 
 export default function ServicesGrid() {
   const [activeDetail, setActiveDetail] = useState(null)

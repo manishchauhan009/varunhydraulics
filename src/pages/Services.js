@@ -67,7 +67,7 @@ export default function Services() {
               use advanced tools and genuine components wherever possible.
             </p>
             <ul className="text-gray-700 space-y-2 list-disc list-inside">
-              <li>Certified technicians for all major forklift brands</li>
+              <li>Trained technicians for all major forklift brands</li>
               <li>On-site service availability to reduce downtime</li>
               <li>Comprehensive hydraulic system diagnostics</li>
               <li>Flexible maintenance contracts for long-term reliability</li>
@@ -81,7 +81,7 @@ export default function Services() {
               className="rounded-2xl shadow-lg object-cover w-full h-80"
             />
             <div className="absolute -bottom-5 -right-5 bg-white shadow-lg rounded-xl p-4 text-sm text-gray-800">
-              <div className="font-bold text-yellow-600 text-lg">10+</div>
+              <div className="font-bold text-yellow-600 text-lg">15+</div>
               <div>Years Experience</div>
             </div>
           </div>

@@ -14,16 +14,16 @@ export default function ContactForm({ initialService = null }) {
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState(null) // { type: 'loading'|'success'|'error', msg: '' }
 
-useEffect(() => {
-  if (initialService) {
-    setForm((f) => ({ ...f, service: initialService }))
-  } else {
-    try {
-      const prefill = localStorage.getItem('prefillService')
-      if (prefill) setForm((f) => ({ ...f, service: prefill }))
-    } catch (e) {}
-  }
-}, [initialService])
+  useEffect(() => {
+    if (initialService) {
+      setForm((f) => ({ ...f, service: initialService }))
+    } else {
+      try {
+        const prefill = localStorage.getItem('prefillService')
+        if (prefill) setForm((f) => ({ ...f, service: prefill }))
+      } catch (e) { }
+    }
+  }, [initialService])
 
 
   function handleChange(e) {
@@ -42,7 +42,7 @@ useEffect(() => {
     if (Object.keys(validation).length > 0) {
       setErrors(validation)
       setStatus({ type: 'error', msg: 'Please fix the highlighted fields.' })
-      // focus first invalid field (best-effort)
+
       const first = Object.keys(validation)[0]
       const el = document.querySelector(`[name="${first}"]`)
       if (el) el.focus()
@@ -71,13 +71,12 @@ useEffect(() => {
       {status?.msg && (
         <div
           role="status"
-          className={`p-3 rounded-md text-sm ${
-            status.type === 'error'
+          className={`p-3 rounded-md text-sm ${status.type === 'error'
               ? 'bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-300 border border-red-100 dark:border-red-700'
               : status.type === 'success'
-              ? 'bg-green-50 text-green-700 dark:bg-emerald-900/30 dark:text-emerald-200 border border-green-100 dark:border-emerald-700'
-              : 'bg-yellow-50 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-300 border border-yellow-100 dark:border-yellow-700'
-          }`}
+                ? 'bg-green-50 text-green-700 dark:bg-emerald-900/30 dark:text-emerald-200 border border-green-100 dark:border-emerald-700'
+                : 'bg-yellow-50 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-300 border border-yellow-100 dark:border-yellow-700'
+            }`}
         >
           {status.msg}
         </div>
@@ -140,7 +139,7 @@ useEffect(() => {
               name="phone"
               value={form.phone}
               onChange={handleChange}
-              placeholder="+91XXXXXXXXXX"
+              placeholder="+91 XXX XXX XXXX"
               className={`w-full px-3 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-yellow-400 transition
                 bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100
                 border-gray-200 dark:border-slate-700
@@ -166,11 +165,39 @@ useEffect(() => {
               className="w-full px-3 py-3 rounded-lg border bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100 border-gray-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"
             >
               <option value="">Select service (optional)</option>
-              <option>Forklift Repair</option>
-              <option>Hydraulic Pump Repair</option>
-              <option>Cylinder Rebuild</option>
-              <option>Preventive Maintenance</option>
+
+              {/* Forklift Services */}
+              <optgroup label="Forklift Services">
+                <option>Forklift Repair & Overhaul</option>
+                <option>Forklift Engine & Transmission Service</option>
+                <option>Forklift Electrical & Battery System</option>
+                <option>Forklift Tyre & Brake Service</option>
+              </optgroup>
+
+              {/* Hydraulic System Services */}
+              <optgroup label="Hydraulic System Services">
+                <option>Hydraulic Pump Repair</option>
+                <option>Hydraulic Cylinder Rebuild</option>
+                <option>Hydraulic Hose & Fitting Replacement</option>
+                <option>Hydraulic Valve & Control System Service</option>
+                <option>Hydraulic Power Pack Repair & Fabrication</option>
+              </optgroup>
+
+              {/* Maintenance & Contracts */}
+              <optgroup label="Maintenance & Contracts">
+                <option>Preventive Maintenance</option>
+                <option>Emergency On-site Service</option>
+                <option>AMC (Annual Maintenance Contract)</option>
+              </optgroup>
+
+              {/* Industrial & Fabrication */}
+              <optgroup label="Industrial & Fabrication Works">
+                <option>Fabrication & Custom Engineering Works</option>
+                <option>Hydraulic Oil Filtration & Fluid Health Check</option>
+                <option>Spare Parts Supply</option>
+              </optgroup>
             </select>
+
           </div>
         </label>
       </div>
@@ -218,7 +245,7 @@ useEffect(() => {
 
           <button
             type="button"
-            onClick={() => { setForm({ name: '', email: '', phone: '', service: '', message: '' }); setErrors({}); setStatus(null)}}
+            onClick={() => { setForm({ name: '', email: '', phone: '', service: '', message: '' }); setErrors({}); setStatus(null) }}
             className="px-4 py-2 border rounded-lg text-sm hover:bg-gray-50 dark:hover:bg-slate-700 transition"
           >
             Reset

@@ -77,7 +77,7 @@ export default function Hero() {
 
               {/* trust/quick stats */}
               <div className="ml-0 sm:ml-4 mt-3 sm:mt-0 text-sm text-gray-500">
-                <span className="font-semibold text-gray-800">10+</span> years experience · <span className="font-semibold text-gray-800">300+</span> jobs completed
+                <span className="font-semibold text-gray-800">15+</span> years experience · <span className="font-semibold text-gray-800">1000+</span> jobs completed
               </div>
             </div>
           </div>

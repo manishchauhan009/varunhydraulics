@@ -1,12 +1,5 @@
-import React from 'react'
 
-/**
- * WhatsAppButton
- * props:
- *  - phone: string, in international format without plus, e.g. "9198XXXXXXX"
- *  - message: default prefilled message
- */
-export default function WhatsAppButton({ phone = '9198XXXXXXX', message = 'Hi, I need service for my forklift. Can you help?' }) {
+export default function WhatsAppButton({ phone = '919998748236', message = 'Hi, I need service for my forklift. Can you help?' }) {
   const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
 
   return (
@@ -14,7 +7,7 @@ export default function WhatsAppButton({ phone = '9198XXXXXXX', message = 'Hi, I
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed right-5 bottom-5 z-50 flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-full shadow-lg"
+      className="fixed right-5 bottom-14 z-50 flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-full shadow-lg"
       aria-label="Message us on WhatsApp"
       title="Message us on WhatsApp"
     >

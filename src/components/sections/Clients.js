@@ -1,56 +1,55 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
-/**
- * Clients section
- * - Place logo images in public/assets/clients/ e.g. public/assets/clients/client1.png
- * - Provide filenames in the `CLIENT_LOGOS` array below (or fetch them dynamically)
- *
- * Usage: import Clients from '../components/sections/Clients' and render <Clients />
- */
-
-const CLIENT_LOGOS = [
-  '/assets/clients/client1.jpg',
-  '/assets/clients/client2.png',
-  '/assets/clients/client3.png',
-  '/assets/clients/client4.png',
-  '/assets/clients/client5.png',
-  '/assets/clients/client6.png',
+const DEFAULT_LOGOS = [
+  { src: '/assets/clients/client1.png', alt: 'Client 1' },
+  { src: '/assets/clients/client2.png', alt: 'Client 2' },
+  { src: '/assets/clients/client3.png', alt: 'Client 3' },
+  { src: '/assets/clients/client4.png', alt: 'Client 4' },
+  { src: '/assets/clients/client5.png', alt: 'Client 5' },
+  { src: '/assets/clients/client6.png', alt: 'Client 6' },
 ]
 
 export default function Clients({
   title = 'Trusted by local businesses',
-  subtitle = 'We’ve worked with warehouses, manufacturers and logistics teams across the region.',
-  autoplay = true,        // set false to disable automatic scroll on small screens
-  autoplayDelay = 3000,   // ms between auto scrolls
+  subtitle = "We’ve worked with warehouses, manufacturers and logistics teams across the region.",
+  logos = DEFAULT_LOGOS,
+  autoplay = true,
+  autoplayDelay = 3500,
 }) {
   const scrollerRef = useRef(null)
+  const [current, setCurrent] = useState(0)
   const idxRef = useRef(0)
+  const timerRef = useRef(null)
 
-  // Simple autoplay for the horizontal scroller on small screens (only when scroller is scrollable)
+  // autoplay logic (only meaningful on mobile / small screens where scroller is visible)
   useEffect(() => {
-    if (!autoplay) return
     const el = scrollerRef.current
-    if (!el) return
+    if (!autoplay || !el) return
 
-    let timer = null
+    const children = () => Array.from(el.querySelectorAll('[data-client-item]'))
     const start = () => {
-      if (timer) clearInterval(timer)
-      timer = setInterval(() => {
-        // if small screen (mobile-like), perform small scroll steps
-        // scroll-snap aligns children; we scroll by container width / item width
-        const children = Array.from(el.querySelectorAll('[data-client-item]'))
-        if (children.length === 0) return
-        idxRef.current = (idxRef.current + 1) % children.length
-        const next = children[idxRef.current]
+      stop()
+      timerRef.current = setInterval(() => {
+        const items = children()
+        if (!items.length) return
+        idxRef.current = (idxRef.current + 1) % items.length
+        const next = items[idxRef.current]
         if (next) {
           next.scrollIntoView({ behavior: 'smooth', inline: 'center' })
+          setCurrent(idxRef.current)
         }
       }, autoplayDelay)
     }
+    const stop = () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current)
+        timerRef.current = null
+      }
+    }
+
     start()
 
-    // pause on hover / interaction
-    const onEnter = () => { if (timer) clearInterval(timer) }
+    const onEnter = () => stop()
     const onLeave = () => start()
 
     el.addEventListener('mouseenter', onEnter)
@@ -59,13 +58,36 @@ export default function Clients({
     el.addEventListener('touchend', onLeave)
 
     return () => {
-      if (timer) clearInterval(timer)
+      stop()
       el.removeEventListener('mouseenter', onEnter)
       el.removeEventListener('touchstart', onEnter)
       el.removeEventListener('mouseleave', onLeave)
       el.removeEventListener('touchend', onLeave)
     }
   }, [autoplay, autoplayDelay])
+
+  // helpers
+  function scrollToIndex(i) {
+    const el = scrollerRef.current
+    if (!el) return
+    const items = Array.from(el.querySelectorAll('[data-client-item]'))
+    if (!items.length) return
+    idxRef.current = Math.max(0, Math.min(items.length - 1, i))
+    const next = items[idxRef.current]
+    if (next) {
+      next.scrollIntoView({ behavior: 'smooth', inline: 'center' })
+      setCurrent(idxRef.current)
+    }
+  }
+
+  function handlePrev(e) {
+    e?.preventDefault()
+    scrollToIndex(idxRef.current - 1)
+  }
+  function handleNext(e) {
+    e?.preventDefault()
+    scrollToIndex(idxRef.current + 1)
+  }
 
   return (
     <section className="py-12 bg-white dark:bg-slate-900">
@@ -76,41 +98,93 @@ export default function Clients({
           <p className="mt-2 text-gray-600 dark:text-gray-300">{subtitle}</p>
         </div>
 
-        {/* Logos: grid on md+, horizontal snap on smaller screens */}
-        <div className="mt-8">
-          {/* Desktop grid */}
-          <div className="hidden md:grid md:grid-cols-6 md:gap-6 items-center">
-            {CLIENT_LOGOS.map((src, i) => (
-              <div key={src + i} className="flex items-center justify-center p-4 bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-lg">
-                <img src={src} alt={`Client ${i + 1}`} className="max-h-12 object-contain" />
+        {/* Desktop grid (beautiful, evenly spaced) */}
+        <div className="mt-8 hidden md:grid md:grid-cols-6 md:gap-6 items-center">
+          {logos.map((l, i) => (
+            <div
+              key={l.src + i}
+              className="flex items-center justify-center p-6 rounded-lg bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-md transition"
+            >
+              <img
+                src={l.src}
+                alt={l.alt || `Client ${i + 1}`}
+                className="max-h-14 object-contain filter grayscale transition duration-300 hover:filter-none"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile carousel */}
+        <div className="md:hidden mt-6 relative">
+          {/* Prev / Next controls */}
+          <div className="absolute -left-2 top-1/2 -translate-y-1/2 z-20">
+            <button
+              onClick={handlePrev}
+              aria-label="Previous"
+              className="p-2 rounded-full bg-white/90 dark:bg-slate-800/90 shadow focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            >
+              <svg className="w-5 h-5 text-gray-800 dark:text-gray-100" viewBox="0 0 24 24" fill="none">
+                <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            ref={scrollerRef}
+            className="-mx-4 px-4 overflow-x-auto scroll-pl-4 snap-x snap-mandatory flex gap-4 touch-pan-x"
+            aria-label="Client logos carousel"
+            role="list"
+          >
+            {logos.map((l, i) => (
+              <div
+                key={l.src + i}
+                data-client-item
+                role="listitem"
+                className="snap-center shrink-0 w-40 flex items-center justify-center p-4 rounded-xl bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 shadow-sm"
+                onFocus={() => { idxRef.current = i; setCurrent(i) }}
+              >
+                <img
+                  src={l.src}
+                  alt={l.alt || `Client ${i + 1}`}
+                  className="max-h-12 object-contain filter grayscale transition duration-300 hover:filter-none"
+                  loading="lazy"
+                />
               </div>
             ))}
           </div>
 
-          {/* Mobile carousel */}
-          <div
-            ref={scrollerRef}
-            className="md:hidden mt-3 -mx-4 px-4 overflow-x-auto scroll-pl-4 snap-x snap-mandatory flex gap-4 touch-pan-x"
-            aria-label="Client logos carousel"
-          >
-            {CLIENT_LOGOS.map((src, i) => (
-              <div
-                key={src + i}
-                data-client-item
-                className="snap-center shrink-0 w-44 flex flex-col items-center justify-center p-3 rounded-lg bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700"
-              >
-                <img src={src} alt={`Client ${i + 1}`} className="max-h-12 object-contain" />
-              </div>
+          <div className="absolute -right-2 top-1/2 -translate-y-1/2 z-20">
+            <button
+              onClick={handleNext}
+              aria-label="Next"
+              className="p-2 rounded-full bg-white/90 dark:bg-slate-800/90 shadow focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            >
+              <svg className="w-5 h-5 text-gray-800 dark:text-gray-100" viewBox="0 0 24 24" fill="none">
+                <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          </div>
+
+          {/* indicators */}
+          <div className="mt-4 flex items-center justify-center gap-2">
+            {logos.map((_, i) => (
+              <button
+                key={`dot-${i}`}
+                onClick={() => scrollToIndex(i)}
+                aria-label={`Go to client ${i + 1}`}
+                className={`w-2 h-2 rounded-full ${i === current ? 'bg-yellow-600' : 'bg-gray-300 dark:bg-gray-600'}`}
+              />
             ))}
           </div>
         </div>
 
-        {/* Optional testimonial / quote */}
+        {/* Testimonial */}
         <div className="mt-10 max-w-3xl mx-auto text-center">
           <blockquote className="text-gray-700 dark:text-gray-300 italic text-sm md:text-base">
             “Varun Hydraulics reduced our forklift downtime significantly — fast, professional and clear pricing.”
           </blockquote>
-          <cite className="block mt-3 text-xs text-gray-500 dark:text-gray-400">— Logistics Manager, ACME Warehouse</cite>
+          <cite className="block mt-3 text-xs text-gray-500 dark:text-gray-400">— Logistics Manager</cite>
         </div>
       </div>
     </section>

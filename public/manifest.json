@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "VarunHydraulics",
+  "name": "Varun Hydraulics | Forklift & Hydraulic Repair Services",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,19 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#facc15",
+  "background_color": "#ffffff",
+  "description": "Varun Hydraulics offers professional forklift and hydraulic repair, maintenance, and on-site support services in Vapi, Gujarat. Trusted by industries for reliable performance and fast service.",
+  "orientation": "portrait",
+  "scope": "/",
+  "id": "/",
+  "categories": [
+    "business",
+    "repair",
+    "industrial",
+    "automotive",
+    "maintenance"
+  ],
+  "lang": "en-IN",
+  "dir": "ltr"
 }

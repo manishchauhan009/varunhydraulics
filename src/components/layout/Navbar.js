@@ -69,7 +69,7 @@ export default function Navbar() {
             <div className="mt-4 border-t pt-4 flex items-center justify-between">
               <div>
                 <div className="text-xs text-gray-500">Emergency Line</div>
-                <a href="tel:+9198XXXXXXX" className="font-semibold text-gray-900">+91 98X XXX XXXX</a>
+                <a href="tel:+919998748236" className="font-semibold text-gray-900">+91 999 874 8236</a>
               </div>
               <a
                 href="#contact"

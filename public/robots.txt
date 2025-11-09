@@ -1,3 +1,22 @@
-# https://www.robotstxt.org/robotstxt.html
+# robots.txt for Varun Hydraulics
+# Last updated: November 2025
+
 User-agent: *
-Disallow:
+Allow: /
+
+# Block development and private routes
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+
+# Sitemap for better indexing
+Sitemap: https://www.varunhydraulics.in/sitemap.xml
+
+# Extra SEO
+# Google Search Console verification (replace YOUR_CODE with your code if you add it)
+# google-site-verification: YOUR_CODE
+
+# General SEO notes:
+# - All main pages (Home, Services, About, Contact) are crawlable.
+# - Important for Local Business SEO around Vapi, Gujarat.
+# - Keep meta tags consistent with your index.html.

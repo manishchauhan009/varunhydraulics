@@ -44,8 +44,10 @@ export default function Home() {
             <div>
               <h3 className="text-2xl font-bold">About Varun Hydraulics</h3>
               <p className="mt-3 text-gray-700 dark:text-gray-300 max-w-xl">
-                Family-run, service-first hydraulic repairs: fast diagnostics, transparent quotes and on-site repairs
-                that keep your operations running. We focus on minimizing downtime and extending equipment life.
+                Varun Hydraulics has grown from humble beginnings. It all started in 2006 as <span className="font-semibold text-yellow-600">Lucky Motors</span> — a small two-wheeler repair shop driven by passion and hard work.
+                Over time, we expanded into four-wheeler services and built a strong foundation of technical expertise and trust.
+                In 2020, we rebranded as <span className="font-semibold text-yellow-600">Varun Hydraulics</span>, focusing on forklift and hydraulic system repairs.
+                What began as a small workshop now stands as a specialized service partner for industries that rely on reliable, efficient, and precise hydraulic solutions.
               </p>
 
               <ul className="mt-4 text-sm text-gray-600 dark:text-gray-300 space-y-2 list-inside list-disc max-w-xl">
@@ -81,7 +83,7 @@ export default function Home() {
                 {/* subtle badge */}
                 <div className="absolute -top-4 -left-4 bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-xl px-3 py-2 shadow-md flex items-center gap-3">
                   <svg className="w-5 h-5 text-yellow-600" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z" fill="currentColor"/>
+                    <path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z" fill="currentColor" />
                   </svg>
                   <div>
                     <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">Fast response</div>
