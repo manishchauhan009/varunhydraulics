@@ -1,7 +1,6 @@
 // src/pages/About.jsx
-import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ROUTES } from '../constants/routes' // ensure this exists: { CONTACT: '/contact', ... }
+import { ROUTES } from '../constants/routes' 
 
 export default function About() {
   const navigate = useNavigate()
@@ -145,14 +144,14 @@ function ValueCard({ title, desc }) {
   )
 }
 
-function TeamCard({ name, role, img }) {
-  return (
-    <div className="p-4 bg-white dark:bg-slate-900 rounded-xl shadow-sm flex items-center gap-4">
-      <img src={img} alt={name} className="w-16 h-16 rounded-lg object-cover" />
-      <div>
-        <div className="font-semibold text-gray-900 dark:text-gray-100">{name}</div>
-        <div className="text-sm text-gray-600 dark:text-gray-300">{role}</div>
-      </div>
-    </div>
-  )
-}
+// function TeamCard({ name, role, img }) {
+//   return (
+//     <div className="p-4 bg-white dark:bg-slate-900 rounded-xl shadow-sm flex items-center gap-4">
+//       <img src={img} alt={name} className="w-16 h-16 rounded-lg object-cover" />
+//       <div>
+//         <div className="font-semibold text-gray-900 dark:text-gray-100">{name}</div>
+//         <div className="text-sm text-gray-600 dark:text-gray-300">{role}</div>
+//       </div>
+//     </div>
+//   )
+// }

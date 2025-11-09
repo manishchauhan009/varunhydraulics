@@ -1,5 +1,6 @@
 import React from "react";
-import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt  } from "react-icons/fa";
+// import {FaFacebookF, FaInstagram, FaLinkedinIn} from "react-icons/fa";
 
 export default function Footer() {
   return (
