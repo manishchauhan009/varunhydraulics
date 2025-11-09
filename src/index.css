@@ -1,13 +1,30 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smooth color mode transition */
+:root {
+  color-scheme: light;
+}
+.dark {
+  color-scheme: dark;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* optional: small background defaults */
+body {
+  @apply bg-white text-black;
 }
+.dark body {
+  @apply bg-slate-900 text-gray-100;
+}
+
+/* make color transitions smooth */
+* {
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+/* QUICK DARK OVERRIDE — use only temporarily if you don't want to edit components yet */
+.dark .bg-white { background-color: #0f172a !important; }       /* slate-900 */
+.dark .bg-gray-50 { background-color: #0b1220 !important; }     /* darker */
+.dark .text-black { color: #e5e7eb !important; }                /* gray-200 */
+.dark .border-gray-200 { border-color: #2b3440 !important; }    /* slate-700 */
