@@ -2,12 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { validateForm } from '../../utils/validators'
 import { sendBooking } from '../../services/emailjs'
 
-/**
- * EnquiryModal
- * props:
- *  - service: service object (title, id, ...)
- *  - onClose: fn to close the modal
- */
 export default function EnquiryModal({ service, onClose }) {
   const [form, setForm] = useState({ name: '', email: '', phone: '', service: service?.title || '', message: '' })
   const [errors, setErrors] = useState({})

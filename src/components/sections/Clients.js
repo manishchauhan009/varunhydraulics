@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 const DEFAULT_LOGOS = [
   { src: '/assets/clients/client1.png', alt: 'Client 1' },
@@ -13,58 +13,10 @@ export default function Clients({
   title = 'Trusted by local businesses',
   subtitle = "We’ve worked with warehouses, manufacturers and logistics teams across the region.",
   logos = DEFAULT_LOGOS,
-  autoplay = true,
-  autoplayDelay = 3500,
 }) {
   const scrollerRef = useRef(null)
   const [current, setCurrent] = useState(0)
   const idxRef = useRef(0)
-  const timerRef = useRef(null)
-
-  // autoplay logic (only meaningful on mobile / small screens where scroller is visible)
-  useEffect(() => {
-    const el = scrollerRef.current
-    if (!autoplay || !el) return
-
-    const children = () => Array.from(el.querySelectorAll('[data-client-item]'))
-    const start = () => {
-      stop()
-      timerRef.current = setInterval(() => {
-        const items = children()
-        if (!items.length) return
-        idxRef.current = (idxRef.current + 1) % items.length
-        const next = items[idxRef.current]
-        if (next) {
-          next.scrollIntoView({ behavior: 'smooth', inline: 'center' })
-          setCurrent(idxRef.current)
-        }
-      }, autoplayDelay)
-    }
-    const stop = () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current)
-        timerRef.current = null
-      }
-    }
-
-    start()
-
-    const onEnter = () => stop()
-    const onLeave = () => start()
-
-    el.addEventListener('mouseenter', onEnter)
-    el.addEventListener('touchstart', onEnter, { passive: true })
-    el.addEventListener('mouseleave', onLeave)
-    el.addEventListener('touchend', onLeave)
-
-    return () => {
-      stop()
-      el.removeEventListener('mouseenter', onEnter)
-      el.removeEventListener('touchstart', onEnter)
-      el.removeEventListener('mouseleave', onLeave)
-      el.removeEventListener('touchend', onLeave)
-    }
-  }, [autoplay, autoplayDelay])
 
   // helpers
   function scrollToIndex(i) {
@@ -84,6 +36,7 @@ export default function Clients({
     e?.preventDefault()
     scrollToIndex(idxRef.current - 1)
   }
+
   function handleNext(e) {
     e?.preventDefault()
     scrollToIndex(idxRef.current + 1)
@@ -98,7 +51,7 @@ export default function Clients({
           <p className="mt-2 text-gray-600 dark:text-gray-300">{subtitle}</p>
         </div>
 
-        {/* Desktop grid (beautiful, evenly spaced) */}
+        {/* Desktop grid */}
         <div className="mt-8 hidden md:grid md:grid-cols-6 md:gap-6 items-center">
           {logos.map((l, i) => (
             <div
@@ -115,9 +68,9 @@ export default function Clients({
           ))}
         </div>
 
-        {/* Mobile carousel */}
+        {/* Mobile carousel (manual only, no auto-scroll) */}
         <div className="md:hidden mt-6 relative">
-          {/* Prev / Next controls */}
+          {/* Prev / Next buttons */}
           <div className="absolute -left-2 top-1/2 -translate-y-1/2 z-20">
             <button
               onClick={handlePrev}
@@ -166,7 +119,7 @@ export default function Clients({
             </button>
           </div>
 
-          {/* indicators */}
+          {/* Indicators */}
           <div className="mt-4 flex items-center justify-center gap-2">
             {logos.map((_, i) => (
               <button

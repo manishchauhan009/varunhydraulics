@@ -2,29 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Smooth color mode transition */
-:root {
-  color-scheme: light;
-}
-.dark {
-  color-scheme: dark;
+/* tell the browser which color scheme we're providing */
+:root { color-scheme: light; }
+html.dark { color-scheme: dark; }
+
+/* smooth color transitions for colors / backgrounds only (not layout) */
+:root, html.dark {
+  --transition-fast: 160ms;
 }
 
-/* optional: small background defaults */
-body {
-  @apply bg-white text-black;
-}
-.dark body {
-  @apply bg-slate-900 text-gray-100;
+html, body {
+  transition: background-color var(--transition-fast) ease, color var(--transition-fast) ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* make color transitions smooth */
-* {
-  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+/* prefer-reduced-motion: opt-out of animations/transitions for those who want */
+@media (prefers-reduced-motion: reduce) {
+  html, body, * {
+    transition: none !important;
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
 }
 
-/* QUICK DARK OVERRIDE — use only temporarily if you don't want to edit components yet */
-.dark .bg-white { background-color: #0f172a !important; }       /* slate-900 */
-.dark .bg-gray-50 { background-color: #0b1220 !important; }     /* darker */
-.dark .text-black { color: #e5e7eb !important; }                /* gray-200 */
-.dark .border-gray-200 { border-color: #2b3440 !important; }    /* slate-700 */
+/* default backgrounds (light) */
+body { background-color: #ffffff; }
+html.dark body { background-color: #0f1724; } /* slate-900 / dark fallback */
+
+.ui-transition,
+button, a, .card, input, textarea {
+  transition: background-color var(--transition-fast) ease, color var(--transition-fast) ease,
+              border-color var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+}
+
+html.dark .prefer-dark-bg {
+  background-color: #0f1724; /* slate-900 */
+  color: #e5e7eb; /* gray-200 */
+  border-color: #1f2937; /* slate-800 */
+}
+
+.text-contrast {
+  color: #111827; /* gray-900 */
+}
+html.dark .text-contrast { color: #f8fafc; /* gray-50 */ }

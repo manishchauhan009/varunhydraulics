@@ -7,7 +7,7 @@ export default function WhatsAppButton({ phone = '919998748236', message = 'Hi, 
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed right-5 bottom-14 z-50 flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-full shadow-lg"
+      className="fixed right-5 bottom-20 z-50 flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-full shadow-lg"
       aria-label="Message us on WhatsApp"
       title="Message us on WhatsApp"
     >

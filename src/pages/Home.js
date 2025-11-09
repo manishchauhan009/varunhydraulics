@@ -113,7 +113,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="rounded-2xl shadow-sm bg-white dark:bg-slate-800  dark:border-slate-700 p-6">
+          <div className="rounded-2xl shadow-sm bg-white dark:bg-slate-800  dark:border-slate-700 mb-6">
             <ContactForm />
           </div>
         </section>
