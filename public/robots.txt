@@ -10,11 +10,8 @@ Disallow: /private/
 Disallow: /temp/
 
 # Sitemap for better indexing
-Sitemap: https://www.varunhydraulics.in/sitemap.xml
+Sitemap: https://www.varunhydraulics.vercel.app/sitemap.xml
 
-# Extra SEO
-# Google Search Console verification
-# google-site-verification=CVCfd7xQmtSQmMzHoh0xJljwshw8J4NtyNmgyKNnYlA
 
 # General SEO notes:
 # - All main pages (Home, Services, About, Contact) are crawlable.
