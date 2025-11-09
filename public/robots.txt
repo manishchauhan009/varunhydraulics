@@ -13,8 +13,7 @@ Disallow: /temp/
 Sitemap: https://www.varunhydraulics.in/sitemap.xml
 
 # Extra SEO
-# Google Search Console verification (replace YOUR_CODE with your code if you add it)
-# google-site-verification: YOUR_CODE
+google-site-verification=CVCfd7xQmtSQmMzHoh0xJljwshw8J4NtyNmgyKNnYlA
 
 # General SEO notes:
 # - All main pages (Home, Services, About, Contact) are crawlable.
