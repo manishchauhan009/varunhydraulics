@@ -16,3 +16,13 @@ createRoot(document.getElementById('root')).render(
 </React.StrictMode>
 )
 reportWebVitals();
+
+if (!('theme' in localStorage)) {
+  localStorage.theme = 'light' 
+}
+
+if (localStorage.theme === 'dark') {
+  document.documentElement.classList.add('dark')
+} else {
+  document.documentElement.classList.remove('dark')
+}
