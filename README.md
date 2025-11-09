@@ -1,70 +1,197 @@
-# Getting Started with Create React App
+## 🏗️ **Varun Hydraulics – Forklift & Hydraulic Repair Website**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive, and SEO-optimized website for **Varun Hydraulics**, a professional forklift and hydraulic repair service provider based in **Vapi, Gujarat**.
+The site showcases services, company details, contact/booking form (powered by EmailJS), client logos, and integrated Google Maps for easy location access.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+### 🌐 **Live Demo**
 
-### `npm start`
+> 🔗 [https://www.varunhydraulics.in](https://www.varunhydraulics.in)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### ⚙️ **Tech Stack**
 
-### `npm test`
+| Tool                            | Purpose                                            |
+| ------------------------------- | -------------------------------------------------- |
+| **React.js (Create React App)** | Frontend framework                                 |
+| **Tailwind CSS**                | Styling and responsive design                      |
+| **EmailJS**                     | Email service integration for contact/booking form |
+| **Framer Motion**               | Smooth animations                                  |
+| **Lucide React Icons**          | Modern and clean icons                             |
+| **ShadCN UI Components**        | Accessible and reusable UI blocks                  |
+| **Google Maps Embed**           | Interactive business location                      |
+| **SEO & Open Graph Tags**       | Improved discoverability and social sharing        |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+### 📁 **Project Structure**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+Varun-Hydraulics/
+│
+├── public/
+│   ├── favicon.ico
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── social-share.jpg
+│   ├── manifest.json
+│   └── index.html
+│
+├── src/
+│   ├── components/
+│   │   ├── sections/     # Hero, ServicesGrid, Clients, ContactForm
+│   │   ├── ui/           # Reusable UI components
+│   │   └── services/     # Modals, utilities
+│   │
+│   ├── pages/
+│   │   ├── Home.jsx
+│   │   ├── Services.jsx
+│   │   ├── About.jsx
+│   │   └── Contact.jsx
+│   │
+│   ├── services/
+│   │   ├── emailjs.js    # Handles EmailJS API calls
+│   │
+│   ├── utils/
+│   │   └── validators.js # Validation functions for contact form
+│   │
+│   ├── App.js
+│   └── index.js
+│
+└── package.json
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### ⚡ **Setup Instructions**
 
-### `npm run eject`
+#### 1️⃣ Clone the Repository
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+git clone https://github.com/yourusername/varun-hydraulics.git
+cd varun-hydraulics
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### 2️⃣ Install Dependencies
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### 3️⃣ Configure Environment Variables
 
-## Learn More
+Create a file named **`.env`** in the root directory (same level as `package.json`)
+and add your **EmailJS** credentials:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```env
+REACT_APP_EMAILJS_SERVICE_ID=your_service_id
+REACT_APP_EMAILJS_TEMPLATE_ID=your_template_id
+REACT_APP_EMAILJS_USER_ID=your_public_key
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+You can get these from your [EmailJS Dashboard](https://www.emailjs.com/).
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 💬 **Contact Form Email Template (EmailJS)**
 
-### Analyzing the Bundle Size
+Example HTML template you can use in EmailJS:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```html
+<div style="font-family: system-ui, sans-serif, Arial; font-size: 14px">
+  <div>A message by {{name}} has been received. Please respond soon.</div>
+  <div style="margin-top: 20px; padding: 15px 0; border-top: 1px dashed lightgrey; border-bottom: 1px dashed lightgrey;">
+    <strong>Name:</strong> {{name}} <br />
+    <strong>Email:</strong> {{email}} <br />
+    <strong>Phone:</strong> {{phone}} <br />
+    <strong>Service:</strong> {{service}} <br />
+    <strong>Message:</strong> {{message}}
+  </div>
+</div>
+```
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 🧩 **Running the Project**
 
-### Advanced Configuration
+#### Development mode:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+npm start
+```
 
-### Deployment
+Then open → [http://localhost:3000](http://localhost:3000)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+#### Production build:
 
-### `npm run build` fails to minify
+```bash
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Build files will be generated in the `/build` folder.
+
+---
+
+### 🚀 **Deployment**
+
+You can deploy easily on:
+
+* **Vercel** → zero-config for CRA
+* **Netlify** → connect GitHub repo and auto-deploy
+* **GitHub Pages** → using `npm run build && npm run deploy`
+
+Make sure to set your environment variables in the platform’s dashboard.
+
+---
+
+### 🗺️ **Google Maps Integration**
+
+Your business location (Vapi, Gujarat) is embedded directly using Google Maps:
+
+```html
+<iframe
+  title="Varun Hydraulics Location"
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1dXXXXXX... (your actual link)"
+  width="100%"
+  height="350"
+  style="border:0;"
+  allowFullScreen=""
+  loading="lazy"
+  referrerPolicy="no-referrer-when-downgrade">
+</iframe>
+```
+
+---
+
+### 🧠 **SEO Optimizations**
+
+✅ Meta tags for title, description, and keywords
+✅ Open Graph & Twitter Card tags for social preview
+✅ JSON-LD structured data for Local Business
+✅ Mobile-first & responsive layout
+✅ Canonical link for clean indexing
+
+---
+
+### 👨‍🔧 **About Varun Hydraulics**
+
+Founded initially as **Lucky Motors (2006)** for two-wheeler repair, we gradually expanded to four-wheelers and later specialized in **Forklift Repair** and **Hydraulic System Services**.
+In **2020**, the brand was renamed **Varun Hydraulics**, marking our evolution into a full-scale service provider offering **Hydraulic Pump & Cylinder Repair**, **Maintenance Contracts**, and **Emergency On-site Support** across **Vapi and nearby industrial areas**.
+
+---
+
+### 📞 **Contact**
+
+**Varun Hydraulics**
+📍 Amar Nagar, Chanod, Vapi, Gujarat – 396195
+📱 +91 999 874 8236
+✉️ [support@varunhydraulics.in](mailto:support@varunhydraulics.in)
+🌍 [https://www.varunhydraulics.in](https://www.varunhydraulics.in)
+
+---
+
+### 📜 **License**
+
+This project is licensed under the **MIT License** — you’re free to use and modify it with proper attribution.
