@@ -27,7 +27,7 @@ html, body {
 }
 
 /* default backgrounds (light) */
-body { background-color: #ffffff; }
+body { background-color: #ffffff; box-sizing: border-box;}
 html.dark body { background-color: #0f1724; } /* slate-900 / dark fallback */
 
 .ui-transition,
@@ -46,3 +46,4 @@ html.dark .prefer-dark-bg {
   color: #111827; /* gray-900 */
 }
 html.dark .text-contrast { color: #f8fafc; /* gray-50 */ }
+

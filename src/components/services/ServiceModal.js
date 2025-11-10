@@ -36,7 +36,7 @@ export default function ServiceModal({ service, onClose }) {
     document.addEventListener('keydown', onKey)
     return () => {
       document.removeEventListener('keydown', onKey)
-      try { previouslyFocused.current?.focus?.() } catch (err) {}
+      try { previouslyFocused.current?.focus?.() } catch (err) { }
     }
   }, [onClose])
 
@@ -99,24 +99,12 @@ export default function ServiceModal({ service, onClose }) {
 
             <div className="ml-auto flex items-center gap-3">
               {/* Call button */}
-              <Button
-                as="a"
-                href={`tel:+${phoneLink}`}
-                variant="outline"
-                size="sm"
-                className="hidden md:inline-flex items-center gap-2 bg-white text-black rounded-lg text-sm font-semibold shadow-sm hover:shadow-md transition"
+              <a
+                href={`tel:${phoneLink}`}
+                className="px-6 py-3 bg-white text-black border border-black dark:border-slate-700 rounded-lg font-semibold inline-flex items-center justify-center"
               >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" aria-hidden>
-                  <path
-                    d="M3 5a2 2 0 012-2h2a2 2 0 012 2v1a1 1 0 01-1 1h-1a9 9 0 009 9v-1a1 1 0 011-1h1a2 2 0 012 2v2a2 2 0 01-2 2h-1"
-                    stroke="currentColor"
-                    strokeWidth="1.4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
                 Call Now
-              </Button>
+              </a>
 
               {/* Close Button */}
               <Button
@@ -189,7 +177,7 @@ export default function ServiceModal({ service, onClose }) {
                       size="md"
                       className="w-full sm:w-auto"
                       onClick={() => {
-                        try { localStorage.setItem('prefillService', service.title) } catch (err) {}
+                        try { localStorage.setItem('prefillService', service.title) } catch (err) { }
                         onClose?.()
                         const el = document.getElementById('contact')
                         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' })
