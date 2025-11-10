@@ -1,9 +1,12 @@
 // src/pages/About.jsx
 import { useNavigate } from 'react-router-dom'
-import { ROUTES } from '../constants/routes' 
+import { ROUTES } from '../constants/routes'
+import Button from '../components/ui/Button'
+import { SITE_CONFIG } from '../constants/siteConfig'
 
 export default function About() {
   const navigate = useNavigate()
+  const phoneLink = SITE_CONFIG?.contact?.phoneLink || '919998748236'
 
   // Smart book handler: scroll to #contact if present, otherwise navigate to Contact page.
   function handleBook(e, prefillService = null) {
@@ -31,8 +34,8 @@ export default function About() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-600 opacity-90" />
         <div className="relative z-10 container mx-auto px-4 py-20 text-center text-white">
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-3">About Varun Hydraulics</h1>
-          <p className="max-w-2xl mx-auto text-lg opacity-95">
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-3 text-black dark:text-white">About Varun Hydraulics</h1>
+          <p className="max-w-2xl mx-auto text-lg opacity-95 text-black/80 dark:text-white">
             Family-run service with professional technicians — keeping warehouses moving since day one.
           </p>
         </div>
@@ -111,20 +114,25 @@ export default function About() {
 
       {/* ===== CTA ===== */}
       <section className="container mx-auto px-4 py-20 text-center" >
-        <div className="bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-2xl shadow-lg py-12 px-6">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-black">Need a trusted partner for repairs?</h2>
+        <div className="bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-2xl shadow-lg py-12 px-6 ">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-black dark:text-white">Need a trusted partner for repairs?</h2>
           <p className="mt-3 text-black/80 max-w-2xl mx-auto">Contact our team for fast diagnostics and clear pricing.</p>
 
           <div className="mt-6 flex flex-col sm:flex-row justify-center gap-4">
             {/* Smart Book: passes no prefillService (you could pass a string if you want a specific service) */}
-            <button
+            <Button
               onClick={(e) => handleBook(e)}
-              className="px-6 py-3 bg-black text-white rounded-lg font-semibold"
+              variant="secondary"
+              size="lg"
             >
               Book a Service
-            </button>
+            </Button>
 
-            <a href="tel:+9198XXXXXXX" className="px-6 py-3 bg-white text-black border border-black rounded-lg font-semibold">
+            {/* Phone uses SITE_CONFIG */}
+            <a
+              href={`tel:${phoneLink}`}
+              className="px-6 py-3 bg-white text-black border border-black dark:border-slate-700 rounded-lg font-semibold inline-flex items-center justify-center"
+            >
               Call Now
             </a>
           </div>

@@ -1,6 +1,8 @@
+// src/components/services/EnquiryModal.jsx
 import React, { useEffect, useState } from 'react'
 import { validateForm } from '../../utils/validators'
 import { sendBooking } from '../../services/emailjs'
+import Button from '../ui/Button'
 
 export default function EnquiryModal({ service, onClose }) {
   const [form, setForm] = useState({ name: '', email: '', phone: '', service: service?.title || '', message: '' })
@@ -38,11 +40,9 @@ export default function EnquiryModal({ service, onClose }) {
 
     setStatus({ type: 'loading', msg: 'Sending enquiry...' })
     try {
-      // sendBooking expects an object; include a small subject so template can use it
       const payload = { ...form, subject: `Enquiry: ${form.service}` }
       await sendBooking(payload)
       setStatus({ type: 'success', msg: 'Enquiry sent — we will contact you soon.' })
-      // optionally auto-close after short delay
       setTimeout(() => {
         onClose()
       }, 1400)
@@ -55,7 +55,7 @@ export default function EnquiryModal({ service, onClose }) {
   if (!service) return null
 
   return (
-    <div className="fixed inset-0 z-60 flex items-end md:items-center justify-center p-4 md:p-8">
+    <div className="fixed inset-0 z-60 flex items-end md:items-center justify-center p-4 md:p-8 mt-8">
       {/* backdrop */}
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
 
@@ -71,22 +71,31 @@ export default function EnquiryModal({ service, onClose }) {
             </div>
           </div>
 
-          <button onClick={onClose} className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-slate-800">
-            <svg className="w-5 h-5 text-gray-600 dark:text-gray-300" viewBox="0 0 24 24" fill="none">
+          <Button
+            variant="ghost"
+            size="sm"
+            aria-label="Close enquiry"
+            onClick={onClose}
+            className="p-2 rounded-md"
+          >
+            <svg className="w-5 h-5 text-gray-600 dark:text-gray-300" viewBox="0 0 24 24" fill="none" aria-hidden>
               <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-          </button>
+          </Button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-6 space-y-4 mt-4">
           {status?.msg && (
-            <div className={`p-3 rounded text-sm ${
-              status.type === 'error'
-                ? 'bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-300'
-                : status.type === 'success'
-                ? 'bg-green-50 text-green-700 dark:bg-emerald-900/30 dark:text-emerald-200'
-                : 'bg-yellow-50 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-300'
-            }`}>
+            <div
+              className={`p-3 rounded text-sm ${
+                status.type === 'error'
+                  ? 'bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-300'
+                  : status.type === 'success'
+                  ? 'bg-green-50 text-green-700 dark:bg-emerald-900/30 dark:text-emerald-200'
+                  : 'bg-yellow-50 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-300'
+              }`}
+              role="status"
+            >
               {status.msg}
             </div>
           )}
@@ -117,7 +126,7 @@ export default function EnquiryModal({ service, onClose }) {
               value={form.message}
               onChange={handleChange}
               placeholder="Short description of the issue / location / preferred time"
-              className={`mt-1 w-full px-3 py-3 rounded-lg border bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100 border-gray-200 dark:border-slate-700 ${errors.message ? 'ring-1 ring-red-400 dark:ring-red-600':''}`}
+              className={`mt-1 w-full px-3 py-3 rounded-lg border bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100 border-gray-200 dark:border-slate-700 ${errors.message ? 'ring-1 ring-red-400 dark:ring-red-600' : ''}`}
               rows={4}
             />
             {errors.message && <p className="mt-1 text-xs text-red-600 dark:text-red-300">{errors.message}</p>}
@@ -125,18 +134,20 @@ export default function EnquiryModal({ service, onClose }) {
 
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <button
+              <Button
                 type="submit"
+                variant="primary"
+                size="md"
                 disabled={status?.type === 'loading'}
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-md font-semibold transition
-                  ${status?.type === 'loading' ? 'bg-yellow-400 text-black cursor-wait' : 'bg-yellow-600 text-black hover:opacity-95'}`}
+                className="inline-flex items-center gap-2"
+                aria-label="Send enquiry"
               >
                 {status?.type === 'loading' ? <Spinner /> : 'Send Enquiry'}
-              </button>
+              </Button>
 
-              <button type="button" onClick={onClose} className="px-3 py-2 border rounded-md hover:bg-gray-50 dark:hover:bg-slate-800">
+              <Button type="button" variant="outline" size="md" onClick={onClose}>
                 Cancel
-              </button>
+              </Button>
             </div>
 
             <div className="text-xs text-gray-500 dark:text-gray-400">We reply within 24 hours</div>

@@ -14,8 +14,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#F59E0B" /> <!-- yellow brand color -->
 
-    <!-- Canonical (change to your real domain in production) -->
-    <link rel="canonical" href="https://www.varunhydraulics.vercel.app/" />
+    <!-- Canonical -->
+    <link rel="canonical" href="https://varunhydraulics.vercel.app/" />
 
     <!-- Favicon / Touch Icons -->
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -28,11 +28,11 @@
     <meta name="mobile-web-app-capable" content="yes" />
 
     <!-- Open Graph / Social -->
-    <!-- Replace the social image path with an actual share image in public/ (recommended: 1200x630) -->
+    <!-- Replace social-share.jpg in public/ with a 1200x630 social image for best results -->
     <meta property="og:type" content="business.business" />
     <meta property="og:title" content="Varun Hydraulics — Forklift & Hydraulic Repair" />
     <meta property="og:description" content="On-site forklift and hydraulic system repair in Vapi — pump & cylinder rebuilds, preventive maintenance, and emergency support. Call +91 999 874 8236." />
-    <meta property="og:url" content="https://www.varunhydraulics.verecel.app/" />
+    <meta property="og:url" content="https://varunhydraulics.vercel.app/" />
     <meta property="og:image" content="%PUBLIC_URL%/social-share.jpg" />
 
     <!-- Twitter Card -->
@@ -42,7 +42,6 @@
     <meta name="twitter:image" content="%PUBLIC_URL%/social-share.jpg" />
 
     <!-- Preload critical assets -->
-    <!-- <link rel="preload" href="%PUBLIC_URL%/assets/logo.svg" as="image" /> -->
     <link rel="preload" href="%PUBLIC_URL%/assets/hero-forklift.jpg" as="image" />
 
     <!-- Structured data (JSON-LD) — LocalBusiness -->
@@ -52,9 +51,9 @@
         "@type": "LocalBusiness",
         "name": "Varun Hydraulics",
         "image": "%PUBLIC_URL%/assets/about-workshop.jpg",
-        "@id": "https://www.varunhydraulics.vercel.app/",
-        "url": "https://www.varunhydraulics.vercel.app/",
-        "telephone": "+919998748236",
+        "@id": "https://varunhydraulics.vercel.app/",
+        "url": "https://varunhydraulics.vercel.app/",
+        "telephone": "+91 999 874 8236",
         "priceRange": "₹₹",
         "address": {
           "@type": "PostalAddress",
@@ -69,7 +68,15 @@
           "latitude": 20.400000,
           "longitude": 72.992000
         },
-        "openingHours": "Mo,Tu,We,Th,Fr,Sa 09:00-19:00",
+        "openingHours": [
+          "Mo 10:00-19:00",
+          "Tu 10:00-19:00",
+          "We 10:00-19:00",
+          "Th 10:00-19:00",
+          "Fr 10:00-19:00",
+          "Sa 10:00-19:00",
+          "Su 10:00-16:00"
+        ],
         "sameAs": [
           "https://www.facebook.com/varunhydraulics",
           "https://www.linkedin.com/company/varunhydraulics",
@@ -79,18 +86,15 @@
     </script>
 
     <!-- Optional: analytics snippet placeholder (insert your analytics provider here if desired) -->
-    <!-- Example: Google Analytics or GTM should go here (defer to privacy policy and GDPR requirements) -->
 
     <!-- Stylesheet entry (CRA will inject the bundle CSS automatically when you build) -->
     <link rel="stylesheet" href="%PUBLIC_URL%/index.css" />
 
-    <!-- Accessibility: language already set on html tag, consider alternate languages with hrefLang if you add translations -->
   </head>
 
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-
-    <!-- Scripts are injected by the build process in Create React App -->
+    <!-- Scripts injected by the build process -->
   </body>
 </html>

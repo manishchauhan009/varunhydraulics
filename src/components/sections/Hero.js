@@ -1,5 +1,8 @@
+// src/components/sections/Hero.jsx
 import React from "react"
 import { useNavigate } from "react-router-dom"
+import Button from "../ui/Button"
+import { SITE_CONFIG } from "../../constants/siteConfig"
 
 export default function Hero() {
   const navigate = useNavigate()
@@ -32,7 +35,7 @@ export default function Hero() {
             </h1>
 
             <p className="mt-4 text-gray-600 dark:text-gray-300 max-w-xl">
-              Expert diagnostics, transparent quotes and rapid on-site repairs — trusted by warehouses and factories across the region. Same-day visits where available.
+              {SITE_CONFIG.description}
             </p>
 
             {/* Feature chips */}
@@ -68,23 +71,29 @@ export default function Hero() {
 
             {/* CTAs */}
             <div className="mt-8 flex flex-col sm:flex-row gap-3 items-start sm:items-center">
-              <button
+              <Button
+                as="button"
+                variant="primary"
+                size="md"
                 onClick={handleBook}
-                className="inline-flex items-center gap-2 px-4 py-3 bg-yellow-600 text-black font-semibold rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"
+                className="inline-flex items-center gap-2"
                 aria-label="Book service"
               >
                 Book Service
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" aria-hidden>
                   <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </button>
+              </Button>
 
-              <a
+              <Button
+                as="a"
                 href="/services"
-                className="inline-flex items-center gap-2 px-5 py-3 border rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-slate-800 transition"
+                variant="outline"
+                size="md"
+                className="inline-flex items-center gap-2"
               >
                 View Services
-              </a>
+              </Button>
 
               {/* trust/quick stats */}
               <div className="ml-0 sm:ml-4 mt-3 sm:mt-0 text-sm text-gray-500 dark:text-gray-300">
@@ -122,14 +131,11 @@ export default function Hero() {
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-xs text-gray-500 dark:text-gray-300">Emergency Line</div>
-                  <a href="tel:+919998748236" className="font-semibold text-gray-900 dark:text-gray-100">+91 999 874 8236</a>
+                  <a href={`tel:${SITE_CONFIG.contact.phoneLink}`} className="font-semibold text-gray-900 dark:text-gray-100">{SITE_CONFIG.contact.phone}</a>
                 </div>
-                <button
-                  onClick={handleBook}
-                  className="inline-block px-3 py-2 bg-black text-white rounded-lg text-sm hover:opacity-95 transition"
-                >
+                <Button as="button" variant="secondary" size="sm" onClick={handleBook} className="px-3 py-2">
                   Request
-                </button>
+                </Button>
               </div>
             </div>
           </div>

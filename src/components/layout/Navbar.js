@@ -3,12 +3,13 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../constants/routes'
 import ThemeToggle from '../ui/ThemeToggle'
+import Button from '../ui/Button'               // <-- new
+import { SITE_CONFIG} from '../../constants/siteConfig'       // <-- new
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
-
-  // navigate to Contact page (no in-page scroll)
+  
   function handleBook(e) {
     e?.preventDefault()
     setOpen(false)
@@ -19,15 +20,15 @@ export default function Navbar() {
     <header className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Theme toggle */}
+          {/* Theme toggle + Brand */}
           <div className="flex items-center gap-3">
             <Link to={ROUTES.HOME} className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-sm">
-                <span className="font-bold text-black">VH</span>
+                <span className="font-bold text-black">{SITE_CONFIG.brandShort}</span>
               </div>
               <div className="hidden sm:block">
-                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 leading-4">Varun Hydraulics</div>
-                <div className="text-xs text-gray-600 dark:text-gray-300">Forklift & Hydraulic Service</div>
+                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 leading-4">{SITE_CONFIG.brandName}</div>
+                <div className="text-xs text-gray-600 dark:text-gray-300">{SITE_CONFIG.tagline}</div>
               </div>
             </Link>
           </div>
@@ -41,13 +42,17 @@ export default function Navbar() {
 
           {/* Right */}
           <div className="flex items-center gap-3">
-            <button
+            {/* Book Service -> using Button with same classes as before */}
+            <Button
+              as="button"
+              variant="primary"
               onClick={handleBook}
               className="hidden md:inline-flex items-center gap-2 px-4 py-2 bg-yellow-600 text-black rounded-lg font-medium shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"
             >
               Book Service
-            </button>
+            </Button>
 
+            {/* Theme toggle (desktop) */}
             <div className="hidden md:block">
               <ThemeToggle />
             </div>
@@ -85,15 +90,17 @@ export default function Navbar() {
             <div className="mt-4 border-t border-gray-100 dark:border-slate-800 pt-4 flex items-center justify-between">
               <div>
                 <div className="text-xs text-gray-500 dark:text-gray-400">Emergency Line</div>
-                <a href="tel:+919998748236" className="font-semibold text-gray-900 dark:text-gray-100">+91 999 874 8236</a>
+                <a href={`tel:${SITE_CONFIG.phone}`} className="font-semibold text-gray-900 dark:text-gray-100">{SITE_CONFIG.phoneDisplay}</a>
               </div>
 
-              <button
+              <Button
+                as="button"
+                variant="solidBlack"
                 onClick={handleBook}
                 className="inline-flex items-center px-3 py-2 bg-black text-white rounded-lg hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"
               >
                 Request
-              </button>
+              </Button>
             </div>
           </div>
         </div>

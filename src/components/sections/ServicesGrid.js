@@ -1,7 +1,10 @@
+// src/components/sections/ServicesGrid.jsx
 import React, { useState } from 'react'
 import ServiceCard from '../services/ServiceCard'
 import ServiceModal from '../services/ServiceModal'
 import EnquiryModal from '../services/EnquiryModal'
+import Button from '../ui/Button'
+import { SITE_CONFIG } from '../../constants/siteConfig'
 
 const SERVICES = [
   // 🏗️ Forklift Services
@@ -131,9 +134,9 @@ const SERVICES = [
       'Our AMC covers scheduled inspections, emergency support, priority servicing, and discounts on spare parts.',
     icon: 'clipboard',
   },
-];
+]
 
-export default function ServicesGrid() {
+export default function ServicesGrid({ onBook }) {
   const [activeDetail, setActiveDetail] = useState(null)
   const [activeEnquiry, setActiveEnquiry] = useState(null)
 
@@ -143,15 +146,21 @@ export default function ServicesGrid() {
   const openEnquiry = (service) => setActiveEnquiry(service)
   const closeEnquiry = () => setActiveEnquiry(null)
 
-  const scrollToContact = () => {
+  // If contact is on page: scroll, otherwise navigate to contact route (fallback)
+  function scrollToContact(e) {
+    if (e) e.preventDefault()
     const el = document.getElementById('contact')
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      return
+    }
+    // fallback to contact page
+    window.location.href = '/contact'
   }
 
-  const openWhatsApp = () => {
-    const phone = '919998748236'
-    const msg = encodeURIComponent('Hello Varun Hydraulics! I would like to know more about your services.')
-    window.open(`https://wa.me/${phone}?text=${msg}`, '_blank')
+  function openWhatsApp() {
+    const w = SITE_CONFIG.social?.whatsapp || `https://wa.me/${SITE_CONFIG.contact?.phoneLink}`
+    window.open(w, '_blank')
   }
 
   return (
@@ -167,35 +176,46 @@ export default function ServicesGrid() {
           </div>
 
           <div className="flex flex-wrap gap-3">
-            {/* Book a Service CTA */}
-            <button
+            {/* Book a Service CTA (uses shared Button) */}
+            <Button
+              as="button"
+              variant="primary"
+              size="md"
               onClick={scrollToContact}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black rounded-full font-semibold shadow-sm hover:shadow-lg transition-transform hover:-translate-y-[2px]"
+              className="inline-flex items-center gap-2"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9-7-9-7-9 7 9 7z" />
               </svg>
               Book a Service
-            </button>
+            </Button>
 
             {/* WhatsApp / Contact CTA */}
-            <button
+            <Button
+              as="button"
+              variant="outline"
+              size="md"
               onClick={openWhatsApp}
-              className="inline-flex items-center gap-2 px-5 py-2.5 border border-gray-300 dark:border-slate-600 rounded-full text-sm font-medium text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-800 transition"
+              className="inline-flex items-center gap-2"
             >
-              <svg className="w-5 h-5 text-green-600" viewBox="0 0 24 24" fill="currentColor">
+              <svg className="w-5 h-5 text-green-600" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                 <path d="M20.52 3.48A11.94 11.94 0 0012 0C5.373 0 0 5.373 0 12a11.94 11.94 0 003.48 8.52L0 24l3.6-1.02A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12 0-3.21-1.25-6.21-3.48-8.52z" />
                 <path d="M17.3 14.2c-.3-.15-1.78-.88-2.06-.98-.27-.1-.47-.15-.67.15-.2.3-.78.98-.96 1.18-.17.2-.34.22-.64.07-.3-.15-1.28-.47-2.44-1.5-.9-.8-1.5-1.8-1.67-2.1-.17-.3-.02-.46.13-.61.13-.12.3-.34.45-.5.15-.16.2-.28.3-.46.1-.17.05-.33-.02-.48-.07-.15-.67-1.6-.92-2.2-.24-.57-.49-.49-.67-.5l-.57-.01c-.2 0-.52.07-.8.33-.28.26-1.06 1.04-1.06 2.54 0 1.5 1.08 2.96 1.23 3.17.15.22 2.12 3.36 5.14 4.71 3.02 1.36 3.02.9 3.56.86.56-.04 1.78-.73 2.03-1.45.25-.72.25-1.34.18-1.46-.08-.12-.28-.2-.58-.35z" fill="#fff" />
               </svg>
               Get in Touch
-            </button>
+            </Button>
           </div>
         </div>
 
         {/* Service cards */}
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {SERVICES.map((s) => (
-            <ServiceCard key={s.id} service={s} onViewDetails={openDetails} onEnquire={openEnquiry} />
+            <ServiceCard
+              key={s.id}
+              service={s}
+              onViewDetails={openDetails}
+              onEnquire={openEnquiry}
+            />
           ))}
         </div>
       </div>

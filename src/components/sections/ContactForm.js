@@ -1,6 +1,9 @@
+// src/components/sections/ContactForm.jsx
 import React, { useEffect, useState } from 'react'
+import Button from '../ui/Button'
 import { validateForm } from '../../utils/validators'
 import { sendBooking } from '../../services/emailjs'
+import { SITE_CONFIG } from '../../constants/siteConfig'
 
 export default function ContactForm({ initialService = null }) {
   const [form, setForm] = useState({
@@ -12,8 +15,8 @@ export default function ContactForm({ initialService = null }) {
   })
 
   const [errors, setErrors] = useState({})
-  const [status, setStatus] = useState(null) // { type: 'loading'|'success'|'error', msg: '' }
-
+  const [status, setStatus] = useState(null) 
+  
   useEffect(() => {
     if (initialService) {
       setForm((f) => ({ ...f, service: initialService }))
@@ -25,11 +28,9 @@ export default function ContactForm({ initialService = null }) {
     }
   }, [initialService])
 
-
   function handleChange(e) {
     const { name, value } = e.target
     setForm((s) => ({ ...s, [name]: value }))
-    // live-clear specific field error
     setErrors((prev) => ({ ...prev, [name]: undefined }))
     setStatus(null)
   }
@@ -61,22 +62,26 @@ export default function ContactForm({ initialService = null }) {
     }
   }
 
+  const phoneLink = SITE_CONFIG?.contact?.phoneLink || '919998748236'
+  const phoneDisplay = SITE_CONFIG?.contact?.phone || '+91 999 874 8236'
+
   return (
     <form
       onSubmit={handleSubmit}
       className="space-y-6 bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-2xl p-6 md:p-8 shadow-sm"
       noValidate
+      aria-live="polite"
     >
       {/* Alerts */}
       {status?.msg && (
         <div
           role="status"
           className={`p-3 rounded-md text-sm ${status.type === 'error'
-              ? 'bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-300 border border-red-100 dark:border-red-700'
-              : status.type === 'success'
-                ? 'bg-green-50 text-green-700 dark:bg-emerald-900/30 dark:text-emerald-200 border border-green-100 dark:border-emerald-700'
-                : 'bg-yellow-50 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-300 border border-yellow-100 dark:border-yellow-700'
-            }`}
+            ? 'bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-300 border border-red-100 dark:border-red-700'
+            : status.type === 'success'
+              ? 'bg-green-50 text-green-700 dark:bg-emerald-900/30 dark:text-emerald-200 border border-green-100 dark:border-emerald-700'
+              : 'bg-yellow-50 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-300 border border-yellow-100 dark:border-yellow-700'
+          }`}
         >
           {status.msg}
         </div>
@@ -96,8 +101,7 @@ export default function ContactForm({ initialService = null }) {
               className={`w-full px-3 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-yellow-400 transition
                 bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100
                 border-gray-200 dark:border-slate-700
-                ${errors.name ? 'ring-1 ring-red-400 dark:ring-red-600' : 'focus:shadow'}`
-              }
+                ${errors.name ? 'ring-1 ring-red-400 dark:ring-red-600' : 'focus:shadow'}`}
               aria-invalid={!!errors.name}
               aria-describedby={errors.name ? 'error-name' : undefined}
             />
@@ -118,8 +122,7 @@ export default function ContactForm({ initialService = null }) {
               className={`w-full px-3 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-yellow-400 transition
                 bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100
                 border-gray-200 dark:border-slate-700
-                ${errors.email ? 'ring-1 ring-red-400 dark:ring-red-600' : ''}`
-              }
+                ${errors.email ? 'ring-1 ring-red-400 dark:ring-red-600' : ''}`}
               aria-invalid={!!errors.email}
               aria-describedby={errors.email ? 'error-email' : undefined}
               inputMode="email"
@@ -143,8 +146,7 @@ export default function ContactForm({ initialService = null }) {
               className={`w-full px-3 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-yellow-400 transition
                 bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100
                 border-gray-200 dark:border-slate-700
-                ${errors.phone ? 'ring-1 ring-red-400 dark:ring-red-600' : ''}`
-              }
+                ${errors.phone ? 'ring-1 ring-red-400 dark:ring-red-600' : ''}`}
               aria-invalid={!!errors.phone}
               aria-describedby={errors.phone ? 'error-phone' : undefined}
               inputMode="tel"
@@ -166,7 +168,6 @@ export default function ContactForm({ initialService = null }) {
             >
               <option value="">Select service (optional)</option>
 
-              {/* Forklift Services */}
               <optgroup label="Forklift Services">
                 <option>Forklift Repair & Overhaul</option>
                 <option>Forklift Engine & Transmission Service</option>
@@ -174,7 +175,6 @@ export default function ContactForm({ initialService = null }) {
                 <option>Forklift Tyre & Brake Service</option>
               </optgroup>
 
-              {/* Hydraulic System Services */}
               <optgroup label="Hydraulic System Services">
                 <option>Hydraulic Pump Repair</option>
                 <option>Hydraulic Cylinder Rebuild</option>
@@ -183,21 +183,18 @@ export default function ContactForm({ initialService = null }) {
                 <option>Hydraulic Power Pack Repair & Fabrication</option>
               </optgroup>
 
-              {/* Maintenance & Contracts */}
               <optgroup label="Maintenance & Contracts">
                 <option>Preventive Maintenance</option>
                 <option>Emergency On-site Service</option>
                 <option>AMC (Annual Maintenance Contract)</option>
               </optgroup>
 
-              {/* Industrial & Fabrication */}
               <optgroup label="Industrial & Fabrication Works">
                 <option>Fabrication & Custom Engineering Works</option>
                 <option>Hydraulic Oil Filtration & Fluid Health Check</option>
                 <option>Spare Parts Supply</option>
               </optgroup>
             </select>
-
           </div>
         </label>
       </div>
@@ -226,34 +223,42 @@ export default function ContactForm({ initialService = null }) {
 
       {/* actions */}
       <div className="flex flex-col sm:flex-row items-center gap-3 justify-between">
-        <div className="flex items-center gap-3">
-          <button
+        <div className="flex items-center gap-3 w-full sm:w-auto">
+          <Button
             type="submit"
+            variant="primary"
+            size="md"
+            className={`${status?.type === 'loading' ? 'opacity-90 cursor-wait' : ''} shadow-md`}
             disabled={status?.type === 'loading'}
-            className={`inline-flex items-center gap-2 px-5 py-3 rounded-lg font-semibold transition
-              ${status?.type === 'loading' ? 'bg-yellow-400 text-black opacity-90 cursor-wait' : 'bg-yellow-600 text-black hover:scale-[1.01]'}
-              shadow-md`}
           >
             {status?.type === 'loading' ? (
-              <>
+              <span className="inline-flex items-center gap-2">
                 <Spinner /> Sending...
-              </>
+              </span>
             ) : (
-              <>Send Request</>
+              'Send Request'
             )}
-          </button>
+          </Button>
 
-          <button
+          <Button
             type="button"
+            variant="outline"
+            size="md"
             onClick={() => { setForm({ name: '', email: '', phone: '', service: '', message: '' }); setErrors({}); setStatus(null) }}
-            className="px-4 py-2 border rounded-lg text-sm hover:bg-gray-50 dark:hover:bg-slate-700 transition"
           >
             Reset
-          </button>
+          </Button>
         </div>
 
         <div className="text-sm text-gray-600 dark:text-gray-300">
-          Or call us: <a className="font-medium text-gray-900 dark:text-gray-100" href="tel:+9198XXXXXXX">+91 999 874 8236</a>
+          Or call us:&nbsp;
+          <a
+            className="font-medium text-gray-900 dark:text-gray-100"
+            href={`tel:${phoneLink}`}
+            aria-label={`Call ${phoneDisplay}`}
+          >
+            {phoneDisplay}
+          </a>
         </div>
       </div>
     </form>

@@ -2,7 +2,9 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import ServicesGrid from '../components/sections/ServicesGrid'
-import { ROUTES } from '../constants/routes' // make sure ROUTES.CONTACT exists
+import Button from '../components/ui/Button'
+import { ROUTES } from '../constants/routes'
+import { SITE_CONFIG } from '../constants/siteConfig' // <- use config for phone
 
 export default function Services() {
   const navigate = useNavigate()
@@ -22,24 +24,24 @@ export default function Services() {
     navigate(ROUTES.CONTACT, { state })
   }
 
+  const phoneLink = SITE_CONFIG?.contact?.phoneLink || '919998748236'
+
   return (
     <div className="bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100 min-h-screen">
       {/* ===== Page Hero Section ===== */}
       <section className="relative overflow-hidden">
-        {/* decorative gradient: lighter in light mode, subtle in dark mode */}
-        <div className="absolute inset-0
-                        bg-gradient-to-r from-yellow-400 to-yellow-600 opacity-95
-                        " />
+        {/* decorative gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-600 opacity-95" />
 
         <div className="relative z-10 container mx-auto px-4 py-20 text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-3 text-black dark:text-white">Our Services</h1>
-          <p className="max-w-2xl mx-auto text-lg text-black/75 dark:text-gray-200/90">
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-3 dark:text-white">Our Services</h1>
+          <p className="max-w-2xl mx-auto text-lg dark:text-white text-black/80">
             Reliable, transparent, and efficient — we specialize in forklift and hydraulic
             system repair, rebuild, and maintenance.
           </p>
         </div>
 
-        {/* subtle background pattern that adapts to color mode */}
+        {/* subtle background pattern */}
         <svg
           className="absolute top-0 left-0 w-full h-full opacity-10 text-white dark:text-white/10"
           xmlns="http://www.w3.org/2000/svg"
@@ -95,31 +97,35 @@ export default function Services() {
             From emergency repairs to long-term maintenance, choose the service that fits your operational needs.
           </p>
 
+          {/* Pass onBook so child can trigger scroll + prefill */}
           <ServicesGrid onBook={(serviceTitle) => scrollToContact(null, serviceTitle)} />
         </div>
       </section>
 
       {/* ===== CTA Section ===== */}
       <section className="container mx-auto px-4 py-20 text-center">
-        <div className="rounded-2xl shadow-lg py-12 px-6 bg-gradient-to-r from-yellow-400 to-yellow-600  ">
+        <div className="rounded-2xl shadow-lg py-12 px-6 bg-gradient-to-r from-yellow-400 to-yellow-600">
           <h2 className="text-3xl md:text-4xl font-extrabold text-black dark:text-white">
             Need Help With Your Forklift or Hydraulic System?
           </h2>
-          <p className="mt-4 text-black/80 dark:text-gray-200 max-w-2xl mx-auto">
+          <p className="mt-4 text-black/80 max-w-2xl mx-auto">
             Get in touch with our expert team for fast diagnostics and reliable on-site repair service.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-            <button
+            <Button
               onClick={(e) => scrollToContact(e)}
-              className="px-6 py-3 bg-white dark:bg-slate-900 text-black dark:text-white border border-black dark:border-slate-700 rounded-lg font-semibold hover:shadow-md transition"
+              variant="secondary"
+              size="lg"
+              className="px-6 py-3"
             >
               Book Service
-            </button>
+            </Button>
+
             <a
-              href="tel:+9198XXXXXXX"
-              className="px-6 py-3 bg-white dark:bg-slate-900 text-black dark:text-white border border-black dark:border-slate-700 rounded-lg font-semibold hover:bg-black hover:text-white transition"
+              href={`tel:${phoneLink}`}
+              className="px-6 py-3 bg-white text-black border border-black dark:border-slate-700 rounded-lg font-semibold inline-flex items-center justify-center"
             >
-              Call Us Now
+             Call Now
             </a>
           </div>
         </div>

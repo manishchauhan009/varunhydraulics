@@ -4,6 +4,8 @@ import Hero from '../components/sections/Hero'
 import ServicesGrid from '../components/sections/ServicesGrid'
 import ContactForm from '../components/sections/ContactForm'
 import Clients from '../components/sections/Clients'
+import Button from '../components/ui/Button'
+import { SITE_CONFIG } from '../constants/siteConfig'
 
 export default function Home() {
   // smooth scroll helper used by CTAs on this page
@@ -13,17 +15,21 @@ export default function Home() {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' })
   }
 
+  const phoneLink = SITE_CONFIG.contact?.phoneLink || '919998748236'
+
   return (
     <div className="bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100">
       {/* Page container with top padding to account for sticky navbar */}
       <div className="container mx-auto px-4 pt-8 space-y-16">
         {/* Hero (large, attention-grabbing) */}
-        <Hero />
+        {/* pass scroll handler to Hero so its CTAs use the same scroll logic */}
+        <Hero onBook={scrollToContact} />
 
         {/* Services overview */}
         <section aria-labelledby="services-heading" className="pt-6">
           <div>
-            <ServicesGrid />
+            {/* pass onBook so ServiceGrid / ServiceCards can use it */}
+            <ServicesGrid onBook={scrollToContact} />
           </div>
         </section>
 
@@ -63,12 +69,16 @@ export default function Home() {
                 >
                   Learn more
                 </a>
-                <button
+
+                {/* use the reusable Button component for Book service */}
+                <Button
                   onClick={scrollToContact}
-                  className="ml-0 md:ml-3 inline-flex items-center px-4 py-2 border rounded-lg text-sm hover:bg-gray-100 dark:hover:bg-slate-700 transition"
+                  variant="outline"
+                  size="md"
+                  className="ml-0 md:ml-3"
                 >
                   Book service
-                </button>
+                </Button>
               </div>
             </div>
 
@@ -104,12 +114,16 @@ export default function Home() {
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href="tel:+919998748236" className="inline-flex items-center gap-2 px-4 py-2 bg-black text-white rounded-lg">
+              <a
+                href={`tel:${phoneLink}`}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-black text-white rounded-lg"
+              >
                 Call Now
               </a>
-              <button onClick={scrollToContact} className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-600 text-black rounded-lg">
+
+              <Button onClick={scrollToContact} variant="primary" size="md">
                 Book Service
-              </button>
+              </Button>
             </div>
           </div>
 
